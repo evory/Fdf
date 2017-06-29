@@ -6,27 +6,27 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 16:52:02 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 04:07:31 by bryanbrandt      ###   ########.fr       */
+/*   Updated: 2017/06/29 16:53:18 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void	ft_pixel_put(t_ms ms, int x, int y)
+void	ft_pixel_put(t_ms *ms, int x, int y)
 {
 	if (x > 0 && y > 0 && x < WIDTH && y < HEIGHT)
 	{
-		if ((ms.z1 > 0 && ms.z1 <= 10) || (ms.z2 > 0 && ms.z2 <= 10))
+		if ((ms->z1 > 0 && ms->z1 <= 10) || (ms->z2 > 0 && ms->z2 <= 10))
 		{
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8))] = -ms.b;
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8)) + 1] = -ms.g;
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8)) + 2] = -ms.r;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 0] = -ms->b;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 1] = -ms->g;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 2] = -ms->r;
 		}
 		else
 		{
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8))] = ms.b;
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8)) + 1] = ms.g;
-			ms.data[(y * ms.s_l) + (x * (ms.bpp / 8)) + 2] = ms.r;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 0] = ms->b;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 1] = ms->g;
+			ms->data[(y * ms->s_l) + (x * (ms->bpp / 8)) + 2] = ms->r;
 		}
 	}
 }
@@ -42,20 +42,6 @@ void	swap_coord(t_ms *ms)
 	ms->px_y = ms->px_yf;
 	ms->px_yf = tmp;
 
-}
-
-void	converting_coord(t_ms *ms)
-{
-	ms->x1 *= ms->zoom;
-	ms->y1 *= ms->zoom;
-	ms->x2 *= ms->zoom;
-	ms->y2 *= ms->zoom;
-	ms->x1 += ms->z1;
-	ms->y1 += ms->z1;
-	ms->x2 += ms->z2;
-	ms->y2 += ms->z2;
-	ms->x2 += ms->z;
-	ms->y2 += ms->z;
 }
 
 void	raster_v(t_ms *ms)

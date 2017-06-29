@@ -6,14 +6,13 @@
 #    By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/28 15:51:08 by bbrandt           #+#    #+#              #
-#    Updated: 2017/06/28 17:01:53 by bbrandt          ###   ########.fr        #
+#    Updated: 2017/06/29 14:38:47 by bbrandt          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 SRC = src/ft_build.c \
-	   src/ft_hooks.c \
 	   src/ft_wire.c \
 	   src/parser.c \
 	   src/main.c \

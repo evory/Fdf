@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:27:20 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 04:07:36 by bryanbrandt      ###   ########.fr       */
+/*   Updated: 2017/06/29 16:53:18 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_ms
 	int				s_l;
 	int				bpp;
 	int				endian;
-	char			*fd;
+	int				fd;
 	int				map_height;
 	int				map_width;
 	int				**array;
@@ -41,6 +41,8 @@ typedef struct		s_ms
 	int				key;
 	int				px_x;
 	int				px_y;
+	int				px_xf;
+	int				px_yf;
 	int				x1;
 	int				x2;
 	int				y1;
@@ -52,16 +54,20 @@ typedef struct		s_ms
 	char			g;
 	char			b;
 	char			z;
+	char			*argv;
 }					t_ms;
 
-void				parser(t_ms *ms);
-void				line_tab_x(t_ms ms);
-void				line_tab_y(t_ms ms);
-void				raster_h(t_ms ms);
-void				raster_v(t_ms ms);
+void				ft_parser(t_ms *ms);
+void				line_tab_x(t_ms *ms);
+void				line_tab_y(t_ms *ms);
+void				raster_h(t_ms *ms);
+void				raster_v(t_ms *ms);
 void				displine(t_ms *ms);
 void				swap_coord(t_ms *ms);
 void				converting_coord(t_ms *ms);
 int					ft_init(t_ms *ms);
+
+int					ft_init_mlx(t_ms *ms);
+
 
 #endif

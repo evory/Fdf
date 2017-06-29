@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 07:30:46 by bryanbrandt      ###   ########.fr       */
+/*   Updated: 2017/06/29 16:47:23 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ int		key_hook(int key, t_ms *ms)
 	return (0);
 }
 
+void	ft_reset_px(t_ms *ms)
+{
+		ms->px_x = (WIDTH / 2 - (ms->map_width * ms->zoom / 2));
+		ms->px_y = (HEIGHT / 2 - (ms->map_height * ms->zoom / 2));
+}
+
 int		ft_init_mlx(t_ms *ms)
 {
-	ms->mlx = mlx_init();
-	ms->win = mlx_new_window(ms->mlx, WIDTH, HEIGHT, "fdf");
+	ft_reset_px(ms);
 	ms->img = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-	ms->data = mlx_get_data_addr(ms->img, ms->bpp, ms->s_l, &ms->endian);
-	mlx_hook(ms->win, KEYPRESS, KEYPRESSMASK, key_hook, ms);
-	mlx_loop(ms->mlx);
+	ms->data = mlx_get_data_addr(ms->img, &ms->bpp, &ms->s_l, &ms->endian);
 	line_tab_x(ms);
 	mlx_put_image_to_window(ms->mlx, ms->win, ms->img, 0, 0);
 	return (0);
@@ -49,8 +52,6 @@ void	ft_init_ms(t_ms *ms)
 {
 	ms->array = NULL;
 	ms->zoom = 35;
-	ms->px_x = (WIDTH / 2);
-	ms->px_y = (HEIGHT / 2);
 	ms->b = 50;
 	ms->g = 50;
 	ms->r = 50;
@@ -59,20 +60,24 @@ void	ft_init_ms(t_ms *ms)
 
 int		main(int argc, char **argv)
 {
-	t_ms	*ms;
+	t_ms	ms;
 
 	if (argc != 2)
 	{
 		ft_putstr("Invalid input !\n");
 		return (0);
 	}
-	ft_init_ms(ms);
-	ms->fd = open(argv[1], O_RDONLY);
-	ft_parser(ms);
-	close(ms->fd);
-	ms->fd = open(argv[1], O_RDONLY);
-	ft_parser(ms);
-	ft_init_mlx(ms);
-	free(ms);
+	ft_init_ms(&ms);
+	ms.fd = open(argv[1], O_RDONLY);
+	ft_parser(&ms);
+	close(ms.fd);
+	ms.fd = open(argv[1], O_RDONLY);
+	ft_parser(&ms);
+	ms.mlx = mlx_init();
+	ms.win = mlx_new_window(ms.mlx, WIDTH, HEIGHT, "fdf");
+	ft_init_mlx(&ms);
+	mlx_hook(ms.win, KEYPRESS, KEYPRESSMASK, key_hook, &ms);
+	mlx_loop(ms.mlx);
+	free(&ms);
 	return (0);
 }
