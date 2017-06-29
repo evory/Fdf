@@ -6,7 +6,7 @@
 #    By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/28 15:51:08 by bbrandt           #+#    #+#              #
-#    Updated: 2017/06/29 17:19:14 by bbrandt          ###   ########.fr        #
+#    Updated: 2017/06/29 22:25:54 by bryanbrandt      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,17 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C lib/libft
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit lib/libft/libft.a
+	make -C libft
+	gcc -o $(NAME) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit
+	libft/libft.a
 	echo "Fdf done"
 
 clean:
-	make clean -C lib/libft
+	make clean -C libft
 	rm -f $(OBJ)
 
 fclean: clean
-	make fclean -C lib/libft
+	make fclean -C libft
 	rm -f $(NAME)
 
 re: fclean all
