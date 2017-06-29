@@ -6,20 +6,18 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 00:49:09 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/28 17:28:59 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/06/29 04:07:30 by bryanbrandt      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void	ft_pixel_put(t_ms *ms, int z)
+int		ft_abs(int val)
 {
-
-	if (ms->px_x < 0 || ms->px_y < 0 || ms->px_x > WIDTH || ms->px_y > HEIGHT)
-		return ;
-		ms->img[ms->px_y * ms->s_l + (ms->px_x * ms->bpp / 8) + 0] = (z > 0) ? -ms->r : ms->r;
-		ms->img[ms->px_y * ms->s_l + (ms->px_x * ms->bpp / 8) + 1] = (z > 0) ? -ms->g : ms->g;
-		ms->img[ms->px_y * ms->s_l + (ms->px_x * ms->bpp / 8) + 2] = (z > 0) ? -ms->b : ms->b;
+	if (val > 0)
+		return (val);
+	else
+		return (-val);
 }
 
 void	converting_coord(t_ms *ms, int z1, int z2)
@@ -34,69 +32,80 @@ void	converting_coord(t_ms *ms, int z1, int z2)
 	ms->px_yf += z2;
 }
 
-int		ft_draw_points_bis(t_ms *ms)
+void	displine(t_ms *ms, int z)
+{
+	if (ft_abs(ms->x2 - ms->x1) >= ft_abs(ms->y2 - ms->y1))
+	{
+		if (ms->x1 < ms->x2)
+			raster_v(ms);
+		else
+		{
+			swap_coord(ms));
+			raster_v(ms);
+		}
+	}
+	else
+	{
+		if (ms->y1 < ms->y2)
+			raster_h(ms);
+		else
+		{
+			swap_coord(ms));
+			raster_h(ms);
+		}
+	}
+}
+
+
+void		line_tab_x(t_ms *ms)
 {
 	int x;
 	int y;
+	int z;
 
 	x = 0;
-	while (x < ms->map_width)
+	while (x < ms->map_height)
 	{
 		y = 0;
-		while (y < ms->map_height)
+		while (y < ms->map_width)
 		{
-			ms->px_z1 = ms->array[y][x];
-			ms->px_z2 = ((y + 1) < ms->map_height) ? ms->array[y + 1][x] : ms->px_z1;
-			ms->px_x = x;
-			ms->px_y = y;
-			ms->px_xf = x;
-			ms->px_yf = ((y + 1) < ms->map_height) ? y + 1 : y;
-			converting_coord(ms, ms->px_z1, ms->px_z2);
-			displine(ms, ms->px_z2);
+			ms.z1 = ms->array[x][y];
+			ms.z2 = ((y + 1) < ms->map_width) ? ms->array[x][y + 1] : ms->z1;
+			ms.x1 = x;
+			ms.y1 = y;
+			ms.x2 = x;
+			ms.y2 = ((y + 1) < ms->map_width) ? y + 1 : y;
+			converting_coord(ms);
+			displine(ms);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(ms->ptr_mlx, ms->ptr_win, ms->ptr_img, 0, 0);
-	return (0);
+	line_tab_y(ms);
 }
 
-int		ft_draw_points(t_ms *ms)
+void	line_tab_y(t_ms *ms)
 {
 	int x;
 	int y;
+	int z;
 
 	y = 0;
-	while (y < ms->map_height)
+	while (y < ms->map_width)
 	{
 		x = 0;
-		while (x < ms->map_width)
+		while (x < ms->map_height)
 		{
-			ms->px_z1 = ms->array[y][x];
-			ms->px_z2 = ((x + 1) < ms->map_width) ? ms->array[y][x + 1] : ms->px_z1;
-			ms->px_x = x;
-			ms->px_y = y;
-			ms->px_xf = ((x + 1) < ms->map_width) ? x + 1 : x;
-			ms->px_yf = y;
-			converting_coord(ms, ms->px_z1, ms->px_z2);
-			displine(ms, ms->px_z2);
+			ms.z1 = ms->array[x][y];
+			ms.z2 = ((x + 1) < ms->map_height) ? ms->array[x + 1][y] : ms->z1;
+			ms.x1 = x;
+			ms.y1 = y;
+			ms.x2 = ((x + 1) < ms->map_height) ? x + 1 : x;
+			ms.y2 = y;
+			converting_coord(ms);
+			displine(ms);
 			x++;
 		}
 		y++;
 	}
-		ft_draw_points_bis(ms);
-		return (0);
-}
-
-int		ft_build(t_ms *ms)
-{
-	ms->ptr_mlx = mlx_init();
-	ms->ptr_win = mlx_new_window(ms->ptr_mlx, WIDTH, HEIGHT, "Fdf");
-	ms->ptr_img = mlx_new_image(ms->ptr_mlx, WIDTH, HEIGHT);
-	ms->img = mlx_get_data_addr(ms->ptr_img, &ms->bpp, &ms->s_l, &ms->endian);
-	mlx_key_hook(ms->ptr_win, &ft_key_hook, ms);
-	// mlx_mouse_hook(ms->ptr_win, &ft_mouse_hook, ms);
-	mlx_loop_hook(ms->ptr_mlx, &ft_draw_points, ms);
-	mlx_loop(ms->ptr_mlx);
-	return (0);
 }
