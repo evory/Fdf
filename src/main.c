@@ -6,36 +6,37 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 16:47:23 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/06/29 19:03:06 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-int		key_hook(int key, t_ms *ms)
+int		key_hook(int keycode, t_ms *ms)
 {
-	if (key == 53)
-	exit(EXIT_SUCCESS);
-	(key == 0) ? ms->px_x -= 25 : ms->px_x;
-	(key == 1) ? ms->px_y += 25 : ms->px_y;
-	(key == 2) ? ms->px_x += 25 : ms->px_x;
-	(key == 5) ? ms->g += 5 : ms->g;
-	(key == 11) ? ms->b += 5 : ms->b;
-	(key == 13) ? ms->px_y -= 25 : ms->px_y;
-	(key == 15) ? ms->r += 5 : ms->r;
-	(key == 69) ? ms->zoom += 5 : ms->zoom;
-	(key == 78) ? ms->zoom -= 5 : ms->zoom;
-	(key == 116) ? ms->z += 1 : ms->z;
-	(key == 121) ? ms->z -= 1 : ms->z;
+	if (keycode == EXIT)
+		exit(EXIT_SUCCESS);
+	(keycode == LEFT) ? ms->x1 -= 25 : ms->x1;
+	(keycode == DOWN) ? ms->y1 += 25 : ms->y1;
+	(keycode == RIGHT) ? ms->x1 += 25 : ms->x1;
+	(keycode == UP) ? ms->y1 -= 25 : ms->y1;
+	(keycode == RED) ? ms->r += 5 : ms->r;
+	(keycode == BLUE) ? ms->b += 5 : ms->b;
+	(keycode == GREEN) ? ms->g += 5 : ms->g;
+	(keycode == ZOOM) ? ms->zoom += 5 : ms->zoom;
+	(keycode == DEZOOM) ? ms->zoom -= 5 : ms->zoom;
+	(keycode == CLMB) ? ms->z += 1 : ms->z;
+	(keycode == CLMBD) ? ms->z -= 1 : ms->z;
 	mlx_destroy_image(ms->mlx, ms->img);
 	ft_init_mlx(ms);
+	printf("%d ", keycode);
 	return (0);
 }
 
 void	ft_reset_px(t_ms *ms)
 {
-		ms->px_x = (WIDTH / 2 - (ms->map_width * ms->zoom / 2));
-		ms->px_y = (HEIGHT / 2 - (ms->map_height * ms->zoom / 2));
+	ms->px_x = (WIDTH / 2) - (ms->map_width * ms->zoom / 2);
+	ms->px_y = (HEIGHT / 2) - (ms->map_height * ms->zoom / 2);
 }
 
 int		ft_init_mlx(t_ms *ms)
@@ -55,7 +56,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->b = 50;
 	ms->g = 50;
 	ms->r = 50;
-	ms->z = 0;
+	ms->z = 1;
 }
 
 int		main(int argc, char **argv)

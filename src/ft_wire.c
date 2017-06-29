@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 16:52:02 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 16:53:18 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/06/29 19:03:08 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ void	swap_coord(t_ms *ms)
 {
 	int tmp;
 
-	tmp = ms->px_x;
-	ms->px_x = ms->px_xf;
-	ms->px_xf = tmp;
-	tmp = ms->px_y;
-	ms->px_y = ms->px_yf;
-	ms->px_yf = tmp;
-
+	tmp = ms->x1;
+	ms->x1 = ms->x2;
+	ms->x2 = tmp;
+	tmp = ms->y1;
+	ms->y1 = ms->y2;
+	ms->y2 = tmp;
 }
 
 void	raster_v(t_ms *ms)
@@ -62,7 +61,7 @@ void	raster_v(t_ms *ms)
 	}
 }
 
-void		raster_h(t_ms *ms)
+void	raster_h(t_ms *ms)
 {
 	int dx;
 	int dy;

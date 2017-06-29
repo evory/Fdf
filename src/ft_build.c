@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 00:49:09 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 16:58:00 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/06/29 18:54:36 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,17 @@ int		ft_abs(int val)
 		return (-val);
 }
 
-void	converting_coord(t_ms *ms)
+void	converting_coord(t_ms *ms, int y, int x)
 {
-	printf("z: %d -- z1: %d -- z2: %d\n", ms->z, ms->z1, ms->z2);
-	printf("px_x: %d -- px_y %d -- px_xf %d -- px_xf: %d\n", ms->px_x, ms->px_y, ms->px_xf, ms->px_yf);
-	ms->px_x *= ms->zoom;
-	ms->px_y *= ms->zoom;
-	ms->px_xf *= ms->zoom;
-	ms->px_yf *= ms->zoom;
-	ms->px_x += ms->z1;
-	ms->px_y += ms->z1;
-	ms->px_xf += ms->z2;
-	ms->px_yf += ms->z2;
-	ms->px_xf += ms->z;
-	ms->px_yf += ms->z;
+	ms->x1 *= ms->zoom;
+	ms->y1 *= ms->zoom;
+	ms->x2 *= ms->zoom;
+	ms->y2 *= ms->zoom;
+	ms->x1 += ms->z1;
+	ms->y1 += ms->z1;
+	ms->x2 += ms->z2;
+	ms->y2 += ms->z2;
+	(ms->array[x][y] > 0) ? ms->x2 += ms->z : ms->x2;
 }
 
 void	displine(t_ms *ms)
@@ -60,7 +57,7 @@ void	displine(t_ms *ms)
 	}
 }
 
-void		line_tab_x(t_ms *ms)
+void	line_tab_x(t_ms *ms)
 {
 	int x;
 	int y;
@@ -77,7 +74,7 @@ void		line_tab_x(t_ms *ms)
 			ms->y1 = y;
 			ms->x2 = x;
 			ms->y2 = ((y + 1) < ms->map_width) ? y + 1 : y;
-			converting_coord(ms);
+			converting_coord(ms, y, x);
 			displine(ms);
 			y++;
 		}
@@ -103,7 +100,7 @@ void	line_tab_y(t_ms *ms)
 			ms->y1 = y;
 			ms->x2 = ((x + 1) < ms->map_height) ? x + 1 : x;
 			ms->y2 = y;
-			converting_coord(ms);
+			converting_coord(ms, y, x);
 			displine(ms);
 			x++;
 		}

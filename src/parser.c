@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:30:12 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 14:40:52 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/06/29 18:26:48 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		**ft_malloc_array(int x, int y, t_ms *ms)
 	int **tab;
 
 	tab = NULL;
-	ms->map_height = y - 1;
-	ms->map_width = x - 1;
+	ms->map_height = y;
+	ms->map_width = x;
 	tab = malloc(sizeof(int*) * y--);
 	while (y >= 0)
 	{
