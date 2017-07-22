@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/06/29 19:03:06 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/22 20:06:04 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int		key_hook(int keycode, t_ms *ms)
 {
 	if (keycode == EXIT)
-		exit(EXIT_SUCCESS);
-	(keycode == LEFT) ? ms->x1 -= 25 : ms->x1;
-	(keycode == DOWN) ? ms->y1 += 25 : ms->y1;
-	(keycode == RIGHT) ? ms->x1 += 25 : ms->x1;
-	(keycode == UP) ? ms->y1 -= 25 : ms->y1;
+	exit(EXIT_SUCCESS);
+	(keycode == UP) ? ms->a1 -= 15 : ms->a1;
+	(keycode == LEFT) ? ms->a -= 15 : ms->a;
+	(keycode == DOWN) ? ms->a1 += 15 : ms->a1;
+	(keycode == RIGHT) ? ms->a += 15 : ms->a;
 	(keycode == RED) ? ms->r += 5 : ms->r;
 	(keycode == BLUE) ? ms->b += 5 : ms->b;
 	(keycode == GREEN) ? ms->g += 5 : ms->g;
@@ -29,7 +29,6 @@ int		key_hook(int keycode, t_ms *ms)
 	(keycode == CLMBD) ? ms->z -= 1 : ms->z;
 	mlx_destroy_image(ms->mlx, ms->img);
 	ft_init_mlx(ms);
-	printf("%d ", keycode);
 	return (0);
 }
 
@@ -37,6 +36,8 @@ void	ft_reset_px(t_ms *ms)
 {
 	ms->px_x = (WIDTH / 2) - (ms->map_width * ms->zoom / 2);
 	ms->px_y = (HEIGHT / 2) - (ms->map_height * ms->zoom / 2);
+	ms->px_x += ms->zoom +ms->a;
+	ms->px_y += ms->zoom +ms->a1;
 }
 
 int		ft_init_mlx(t_ms *ms)
