@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:27:20 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/22 18:08:50 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/22 20:28:43 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "../lib/libft/libft.h"
+# include "../libft/libft.h"
 # include <mlx.h>
 # define WIDTH 2500
 # define HEIGHT 1300
