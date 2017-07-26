@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/22 20:23:10 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/26 16:39:47 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		key_hook(int keycode, t_ms *ms)
 {
 	if (keycode == EXIT)
-	exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	(keycode == UP) ? ms->a1 -= 15 : ms->a1;
 	(keycode == LEFT) ? ms->a -= 15 : ms->a;
 	(keycode == DOWN) ? ms->a1 += 15 : ms->a1;
@@ -36,8 +36,8 @@ void	ft_reset_px(t_ms *ms)
 {
 	ms->px_x = (WIDTH / 2) - (ms->map_width * ms->zoom / 2);
 	ms->px_y = (HEIGHT / 2) - (ms->map_height * ms->zoom / 2);
-	ms->px_x += ms->zoom +ms->a;
-	ms->px_y += ms->zoom +ms->a1;
+	ms->px_x += ms->zoom + ms->a;
+	ms->px_y += ms->zoom + ms->a1;
 }
 
 int		ft_init_mlx(t_ms *ms)
@@ -57,7 +57,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->b = 50;
 	ms->g = 50;
 	ms->r = 50;
-	ms->z = 1;
+	ms->z = 0;
 }
 
 int		main(int argc, char **argv)
