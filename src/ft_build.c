@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 00:49:09 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/26 16:20:32 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/27 16:37:22 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ void	converting_coord(t_ms *ms, int y, int x)
 	ms->y1 += ms->z1;
 	ms->x2 += ms->z2;
 	ms->y2 += ms->z2;
-	(ms->array[x][y] > 0) ? ms->x1 += ms->z : ms->x1;
-	(ms->array[x][y] > 0) ? ms->y1 += ms->z : ms->y1;
-	(ms->array[x][y] > 0) ? ms->x2 += ms->z : ms->x2;
-	(ms->array[x][y] > 0) ? ms->y2 += ms->z : ms->y2;
+	ms->array[x][y] = (ms->array[x][y] != 0 ? ms->array[x][y] += ms->z : ms->array[x][y]);
+	// (ms->array[x][y] > 0) ? ms->x1 += ms->z : ms->x1;
+	// (ms->array[x][y] > 0) ? ms->y1 += ms->z : ms->y1;
+	// (ms->array[x][y] > 0) ? ms->x2 += ms->z : ms->x2;
+	// (ms->array[x][y] > 0) ? ms->y2 += ms->z : ms->y2;
 }
 
 void	displine(t_ms *ms)

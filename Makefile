@@ -6,7 +6,7 @@
 #    By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/28 15:51:08 by bbrandt           #+#    #+#              #
-#    Updated: 2017/07/26 17:08:16 by bbrandt          ###   ########.fr        #
+#    Updated: 2017/07/27 14:52:27 by bbrandt          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = src/ft_build.c \
 	  src/parser.c \
 	  src/main.c \
 
-FLAGS = -Wall -Werror -Wextra -I./includes
+FLAGS = -Wall -Werror -Wextra
 
 OBJ = $(SRC:.c=.o)
 
@@ -26,7 +26,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	make -C libft
 	gcc -o $(NAME) $(FLAGS) $(OBJ) libft/libft.a -lmlx -framework OpenGL -framework AppKit
-	echo "Fdf done"
+	@echo "Fdf done"
 
 clean:
 	make clean -C libft

@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:27:20 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/22 20:28:43 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/27 17:24:40 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FDF_H
 # include <fcntl.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <mlx.h>
@@ -61,9 +60,9 @@ typedef struct		s_ms
 	char			r;
 	char			g;
 	char			b;
-
 	int				a;
 	int				a1;
+	int				high;
 }					t_ms;
 
 void				ft_parser(t_ms *ms);
@@ -76,5 +75,7 @@ void				swap_coord(t_ms *ms);
 void				converting_coord(t_ms *ms, int y, int x);
 int					ft_init(t_ms *ms);
 int					ft_init_mlx(t_ms *ms);
+void				ft_print_modif(t_ms *fdf);
+static void			ft_print_modif1(t_ms *fdf);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/26 16:39:47 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/27 17:41:51 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ int		key_hook(int keycode, t_ms *ms)
 	(keycode == DEZOOM) ? ms->zoom -= 5 : ms->zoom;
 	(keycode == CLMB) ? ms->z += 1 : ms->z;
 	(keycode == CLMBD) ? ms->z -= 1 : ms->z;
+	ms->high += ms->z;
 	mlx_destroy_image(ms->mlx, ms->img);
 	ft_init_mlx(ms);
+	ft_print_modif(ms);
+	ms->z = 0;
 	return (0);
 }
 
@@ -58,6 +61,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->g = 50;
 	ms->r = 50;
 	ms->z = 0;
+	ms->high = 6;
 }
 
 int		main(int argc, char **argv)
@@ -71,6 +75,11 @@ int		main(int argc, char **argv)
 	}
 	ft_init_ms(&ms);
 	ms.fd = open(argv[1], O_RDONLY);
+	if (ms.fd <= 0)
+	{
+		ft_putstr("File doesn't exist !\n");
+		return (0);
+	}
 	ft_parser(&ms);
 	close(ms.fd);
 	ms.fd = open(argv[1], O_RDONLY);
@@ -79,6 +88,7 @@ int		main(int argc, char **argv)
 	ms.win = mlx_new_window(ms.mlx, WIDTH, HEIGHT, "fdf");
 	ft_init_mlx(&ms);
 	mlx_hook(ms.win, KEYPRESS, KEYPRESSMASK, key_hook, &ms);
+	ft_print_modif(&ms);
 	mlx_loop(ms.mlx);
 	free(&ms);
 	return (0);
