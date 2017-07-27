@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:27:20 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/27 17:24:40 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/27 17:55:02 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		s_ms
 	int				a;
 	int				a1;
 	int				high;
+	int				save;
 }					t_ms;
 
 void				ft_parser(t_ms *ms);

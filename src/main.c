@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:13:47 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/27 17:41:51 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/07/27 18:08:02 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_init_mlx(t_ms *ms)
 	ms->data = mlx_get_data_addr(ms->img, &ms->bpp, &ms->s_l, &ms->endian);
 	line_tab_x(ms);
 	mlx_put_image_to_window(ms->mlx, ms->win, ms->img, 0, 0);
+	ft_print_modif(ms);
 	return (0);
 }
 
@@ -88,7 +89,6 @@ int		main(int argc, char **argv)
 	ms.win = mlx_new_window(ms.mlx, WIDTH, HEIGHT, "fdf");
 	ft_init_mlx(&ms);
 	mlx_hook(ms.win, KEYPRESS, KEYPRESSMASK, key_hook, &ms);
-	ft_print_modif(&ms);
 	mlx_loop(ms.mlx);
 	free(&ms);
 	return (0);

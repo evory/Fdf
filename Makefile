@@ -6,7 +6,7 @@
 #    By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/28 15:51:08 by bbrandt           #+#    #+#              #
-#    Updated: 2017/07/27 14:52:27 by bbrandt          ###   ########.fr        #
+#    Updated: 2017/07/27 17:49:42 by bbrandt          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC = src/ft_build.c \
 	  src/ft_wire.c \
 	  src/parser.c \
 	  src/main.c \
+	  src/print_params.c
 
 FLAGS = -Wall -Werror -Wextra
 
