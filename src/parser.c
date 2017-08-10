@@ -6,7 +6,7 @@
 /*   By: bbrandt <bbrandt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:30:12 by bbrandt           #+#    #+#             */
-/*   Updated: 2017/07/27 18:06:23 by bbrandt          ###   ########.fr       */
+/*   Updated: 2017/08/10 15:11:53 by bbrandt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	check_map(char *line)
 	}
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]) == 0 && line[i] != ' ')
+		if ((ft_isdigit(line[i]) == 0 && line[i] != ' ' && line[i] != '-') ||
+		(line[i] == '-' && ft_isdigit(line[i + 1]) == 0))
 		{
 			ft_putstr("Wrong map !\n");
 			exit(0);
